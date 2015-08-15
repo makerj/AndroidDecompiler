@@ -1,12 +1,12 @@
 @echo off
 echo **************************************************
-echo ApkDDD "Simplest Apk decompiler"
+echo Apk Decompiler "Simplest Apk decompiler"
 echo Copyright (c) 2015 Junhui Lee(ohenwkgdj@gmail.com)
 echo **************************************************
 echo.
 
 REM --SET VARIABLE -----------------------
-SET _root=%CD%
+SET _root=%2
 SET _7zout=%_root%\_7zoutPath
 SET _dexout=%_root%\_dexoutPath
 SET _CHILD_PROCESS_NAME=AD_Child
@@ -62,14 +62,8 @@ REM --Start Commands ---------------------
       REN %_root%\classes-dex2jar.src.jar done.zip
       echo.
 
-REM AFTER CLEANING------------------------
-RMDIR /S /Q %_7zout%
-RMDIR /S /Q %_dexout%
-DEL /Q *.src.jar
-DEL /Q null
-CLS
-
 REM --Exit -------------------------------
+CLS
 echo Your apk Successfully decompiled seeya!
 EXIT
 
