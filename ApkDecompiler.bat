@@ -29,8 +29,14 @@ SET _CHILD_PROCESS_NAME=AD_Child
 
 REM --START MAIN--------------------------
 echo Tool suite is running...
-START "AndroidDecompiler" /W %_root%\tools\main.bat %1 %_root%
-TASKKILL /FI "WINDOWTITLE eq AndroidDecompiler*"
+START "apkd" %_root%\tools\main.bat %1 %_root%
+TIMEOUT 12 >nul
+REM --KILL THE MAIN-----------------------
+for /f "tokens=2 delims=," %%a in ('
+    tasklist /fi "imagename eq cmd.exe" /v /fo:csv /nh 
+    ^| findstr /r /c:".*apkd[^,]*$"
+') do taskkill /pid %%a
+CLS
 
 REM AFTER CLEANING------------------------
 echo Now cleaning...
@@ -38,7 +44,6 @@ RMDIR /S /Q %_7zout%
 RMDIR /S /Q %_dexout%
 DEL %_root%\*.src.jar
 DEL %_root%\null
-CLS
 
 echo Your apk Successfully decompiled seeya!
 TIMEOUT 3

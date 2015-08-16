@@ -80,8 +80,7 @@ REM --Start Commands ---------------------
 
 REM --Exit -------------------------------
 CLS
-echo Your apk Successfully decompiled seeya!
-EXIT
+echo End of main
 
 
 
